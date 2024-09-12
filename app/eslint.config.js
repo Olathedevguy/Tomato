@@ -33,6 +33,7 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      'eslint-disable no-unused-vars'
     },
   },
 ]

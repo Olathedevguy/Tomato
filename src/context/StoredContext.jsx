@@ -19,9 +19,22 @@ const StoredContextProvider = (props) => {
         setCartItems((prev)=>({...prev, [itemId]:prev[itemId]-1}))
     }
 
-    useEffect(()=>{
-        console.log(cartItems);
-    },[cartItems])
+
+    const getTotalCartAmount = ()=>{
+        let totalAmount = 0
+        for(const item in cartItems){
+            //bc the cart items is an object, this for-in loop will iterate over that object and provide the items 1 by 1
+            if(cartItems[item]>0){
+            let itemInfo = food_list.find((product)=>product._id === item)//if prod id is matching with the item, it means the product is available in cart
+            totalAmount += itemInfo.price*cartItems[item];
+            }
+        }
+        return totalAmount;
+    }
+
+    // useEffect(()=>{
+    //     console.log(cartItems);
+    // },[cartItems])
 
     const contextValue ={
         food_list,
@@ -29,6 +42,7 @@ const StoredContextProvider = (props) => {
         setCartItems,
         addToCart,
         removeFromCart,
+        getTotalCartAmount
     }
 
     
